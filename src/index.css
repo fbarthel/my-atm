@@ -12,3 +12,26 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.contents{
+  white-space:pre;
+  padding-left: 15px;
+  font-size: 16px;
+}
+
+input[type="number"]{
+  padding: 10px;
+  margin-top: 15px;
+  font-size: 16px;
+}
+
+button{
+  font-size: 16px;
+  margin-left: 10px;
+  padding: 10px;
+}
+.button-restock{
+  position: absolute;
+  left: 300px;
+  top: 233px;
+}
