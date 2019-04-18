@@ -21,11 +21,14 @@ class RestockPage extends Component{
         
         this.setState({values: v, quantities: q, hasChanged: false})
     }
+
+    //modify the quantities for each denomination whose input was changed to a valid number
+    //output which denominations had invalid input, and which were updated
     restock(){
         var q = this.context.quantities
         var success = false  //true if at least one denomination has valid input
         var fail = false     //true if at least one denomination has invalid input
-        var successMessage = "Successfully"
+        var successMessage = ""
         var failMessage = ""
         this.state.quantities.map((quantity, index) => {
             if(quantity > Number.MAX_SAFE_INTEGER){
@@ -56,15 +59,18 @@ class RestockPage extends Component{
         }
     }
     onChange(e){
+        if(e.target.value.match(/^[0-9]+$/)){
         var q = this.state.quantities.slice()
         q[e.target.id] = e.target.value
         this.setState({quantities: q, hasChanged: true})
+        }
     }
     render(){
         return(
         <div className="contents">
         <h1>Restock Bills</h1>
         <p>Adjust the quantities of each denomination. The quantity will be updated to the input amount after pressing "Restock."</p>
+        <form>
         <div className="button-restock">
         <button className={this.state.hasChange ? "enabled" : "disabled"} disabled={!this.state.hasChanged} 
                 type="button" onClick={this.restock}>Restock</button>
@@ -86,6 +92,7 @@ class RestockPage extends Component{
          <br/>
          <label htmlFor="tens">$1 bills:    </label> <input type="number" name="ones" id="5" 
          min={0} max={Number.MAX_SAFE_INTEGER} value={this.state.quantities[5]} onChange={this.onChange} autoComplete="off" />
+         </form>
         </div>         
         )
     }

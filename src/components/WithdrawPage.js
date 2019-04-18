@@ -23,9 +23,17 @@ class WithdrawPage extends Component{
         this.setState({values: v, quantities: q, amount: 0, hasChange: false})
     }
     onChange(e){
+        if(e.target.value.match(/^[0-9]+$/))
         this.setState({[e.target.id]: e.target.value, hasChanged: true})
     }
+
+    //attempt to withdraw the amount in this.state.amount from the current denominations
+    //output whether or not the withdrawal was successful
     tryWithdraw(){
+        if(this.state.amount > Number.MAX_SAFE_INTEGER){
+            alert("Insufficient Funds")
+            return
+        }
         if(this.state.hasChanged && this.state.amount > 0){
             var totalFunds = 0;
             this.state.values.map((value, index) => {

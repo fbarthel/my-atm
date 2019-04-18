@@ -1,5 +1,4 @@
 import React from 'react'
-import OverviewPage from './components/OverviewPage';
 
 const Context = React.createContext("")
 
